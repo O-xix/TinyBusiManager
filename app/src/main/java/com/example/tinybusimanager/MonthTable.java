@@ -21,7 +21,7 @@ public class MonthTable {
 
     public void calculateNetInflow() {
         for (int i = 0; i < financialActivities.size(); i++) {
-            if (financialActivities.get(i).metacategory == "in") {
+            if (financialActivities.get(i).metacategory.equals("PAYMENT")) {
                 NetInFlow += financialActivities.get(i).cash;
             }
         }
@@ -29,7 +29,7 @@ public class MonthTable {
 
     public void calculateNetOutflow() {
         for (int i = 0; i < financialActivities.size(); i++) {
-            if (financialActivities.get(i).metacategory == "out") {
+            if (financialActivities.get(i).metacategory.equals("EXPENSE")) {
                 NetOutFlow += financialActivities.get(i).cash;
             }
         }
@@ -39,18 +39,16 @@ public class MonthTable {
         TotalFlow = NetInFlow - NetOutFlow;
     }
 
-    private class FinancialFluct {
+    public static class FinancialFluct {
         Date date;
-        Time time;
         String title;
         String description;
         double cash;
         String category;
         String metacategory;
 
-        private FinancialFluct(Date date, Time time, String title, String description, double cash, String category, String metacategory) {
+        FinancialFluct(Time date, String title, String description, double cash, String category, String metacategory) {
             this.date = date;
-            this.time = time;
             this.title = title;
             this.description = description;
             this.cash = cash;

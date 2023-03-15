@@ -1,9 +1,9 @@
 package com.example.tinybusimanager;
 
+import static com.example.tinybusimanager.MainActivity.metaFinancialActivityLog;
+
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +13,8 @@ import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+import java.sql.Time;
 import java.util.Locale;
 
 public class InputInOutFlowActivity extends AppCompatActivity {
@@ -34,6 +36,7 @@ public class InputInOutFlowActivity extends AppCompatActivity {
     int dollars;
     int cents;
     double cash;
+    Time date;
 
 
     @Override
@@ -50,6 +53,8 @@ public class InputInOutFlowActivity extends AppCompatActivity {
         editTextCents = (EditText) findViewById(R.id.editTextCents);
         buttonAdd = (Button) findViewById(R.id.buttonAdd);
         NM = (NotificationManager)getSystemService(this.NOTIFICATION_SERVICE);
+        //(Need To Fix)
+        date = ;
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +83,20 @@ public class InputInOutFlowActivity extends AppCompatActivity {
                     cents = Integer.parseInt(String.valueOf(editTextCents.getText()));
                     cash = dollars + ((double) cents / 100);
                     Toast.makeText(InputInOutFlowActivity.this, "You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ", Toast.LENGTH_SHORT).show();
+
+                    for (int i = 0; i < metaFinancialActivityLog.size(); i++) {
+                        //cycling through years
+                        for (int j = 0; j < 11; j++) {
+                            //cycling through months
+                            metaFinancialActivityLog.get(i).fiscalMonths.get(j).financialActivities.add(new MonthTable.FinancialFluct(date, title, description, cash, category, metacategory));
+                        }
+                    }
+
+                    //Notification
                     notify = new Notification.Builder(getApplicationContext()).setContentTitle("TinyBusiManager").setContentText("You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ").setContentTitle(metacategory + "added").setSmallIcon(R.drawable.ic_launcher_background).build();
                     notify.flags |= Notification.FLAG_AUTO_CANCEL;
                     NM.notify(0, notify);
+
                     finish();
                 }
             }
