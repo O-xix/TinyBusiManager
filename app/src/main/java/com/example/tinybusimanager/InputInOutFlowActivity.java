@@ -23,13 +23,16 @@ public class InputInOutFlowActivity extends AppCompatActivity {
     EditText editTextDescription;
     ToggleButton toggleButtonExpensePayment;
     EditText editTextCategory;
-    EditText editTextCash;
+    EditText editTextDollars;
+    EditText editTextCents;
     Button buttonAdd;
 
     String title;
     String description;
     String metacategory;
     String category;
+    int dollars;
+    int cents;
     double cash;
 
 
@@ -43,7 +46,8 @@ public class InputInOutFlowActivity extends AppCompatActivity {
         editTextDescription = (EditText) findViewById(R.id.editTextDescription);
         toggleButtonExpensePayment = (ToggleButton) findViewById(R.id.toggleButtonExpensePayment);
         editTextCategory = (EditText) findViewById(R.id.editTextCategory);
-        editTextCash = (EditText) findViewById(R.id.editTextCash);
+        editTextDollars = (EditText) findViewById(R.id.editTextDollars);
+        editTextCents = (EditText) findViewById(R.id.editTextCents);
         buttonAdd = (Button) findViewById(R.id.buttonAdd);
         NM = (NotificationManager)getSystemService(this.NOTIFICATION_SERVICE);
 
@@ -54,17 +58,27 @@ public class InputInOutFlowActivity extends AppCompatActivity {
                 description = editTextDescription.getText().toString();
                 metacategory = toggleButtonExpensePayment.getText().toString();
                 category = editTextCategory.getText().toString();
-                cash = Double.parseDouble(editTextCash.getText().toString());
 
-                if (title.replaceAll("\\s", "") == "") {
+                if (title.replaceAll("\\s", "").equals("")) {
                     Toast.makeText(InputInOutFlowActivity.this, "Please add a meaningful title.", Toast.LENGTH_SHORT).show();
                 }
-                else if (cash == 0.0) {
-                    Toast.makeText(InputInOutFlowActivity.this, "Please add the cash amount.", Toast.LENGTH_SHORT).show();
+                else if (editTextDollars.getText().toString().equals("") || editTextCents.getText().toString().equals("")) {
+                    if (editTextDollars.getText().toString().equals("") && editTextCents.getText().toString().equals("")) {
+                        Toast.makeText(InputInOutFlowActivity.this, "Please add the cash amount.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (editTextDollars.getText().toString().equals("")) {
+                        Toast.makeText(InputInOutFlowActivity.this, "Please add the dollar amount. (Enter 0 if no dollar value.)", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(InputInOutFlowActivity.this, "Please add the cents amount. (Enter 00 if no cent value.)", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
+                    dollars = Integer.parseInt(String.valueOf(editTextDollars.getText()));
+                    cents = Integer.parseInt(String.valueOf(editTextCents.getText()));
+                    cash = dollars + ((double) cents / 100);
                     Toast.makeText(InputInOutFlowActivity.this, "You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ", Toast.LENGTH_SHORT).show();
-                    Notification notify=new Notification.Builder(getApplicationContext()).setContentTitle("TinyBusiManager").setContentText("You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ").setContentTitle(metacategory + "added").setSmallIcon(R.drawable.ic_launcher_background).build();
+                    notify = new Notification.Builder(getApplicationContext()).setContentTitle("TinyBusiManager").setContentText("You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ").setContentTitle(metacategory + "added").setSmallIcon(R.drawable.ic_launcher_background).build();
                     notify.flags |= Notification.FLAG_AUTO_CANCEL;
                     NM.notify(0, notify);
                     finish();

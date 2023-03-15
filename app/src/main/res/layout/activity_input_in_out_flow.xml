@@ -39,13 +39,38 @@
         android:layout_weight="2"
         android:hint="Category" />
 
-    <EditText
-        android:id="@+id/editTextCash"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="top"
+        android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:hint="Cash" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextDollars"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:layout_weight="1"
+            android:hint="Dollars" />
+
+        <TextView
+            android:text="."
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/editTextCents"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLength="2"
+            android:hint="Cents" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/buttonAdd"
