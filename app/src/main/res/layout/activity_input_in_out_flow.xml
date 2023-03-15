@@ -1,60 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputInOutFlowActivity">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        tools:ignore="MissingConstraints">
-
-    </LinearLayout>
+        android:layout_weight="2"
+        android:hint="Title"
+        />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="380dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="332dp"
-        android:hint="Input Money"
-        android:inputType="TODO"
-        android:textColorHint="#78909C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:hint="Description"
+        />
+
+    <ToggleButton
+        android:id="@+id/toggleButtonExpensePayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textOn="Payment"
+        android:textOff="Expense"
+        />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="380dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="672dp"
-        android:hint="Input Money Exchanged"
-        android:inputType=""
-        android:textColorHint="#78909C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/editTextCategory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="top"
+        android:layout_weight="2"
+        android:hint="Category" />
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="380dp"
-        android:layout_height="48dp"
-        android:hint="Input Money Exchanged"
-        android:inputType="TODO"
-        android:textColorHint="#78909C"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.57" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:id="@+id/editTextCash"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="top"
+        android:layout_weight="2"
+        android:hint="Cash" />
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="ADD" />
+</LinearLayout>
