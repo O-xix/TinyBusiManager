@@ -4,25 +4,25 @@ import java.time.Year;
 import java.util.ArrayList;
 
 public class YearTable {
-    Year year;
-    ArrayList<com.example.tinybusimanager.MonthTable> fiscalMonths;
+    int year;
+    com.example.tinybusimanager.MonthTable[] fiscalMonths = new MonthTable[12];
     double NetInFlow;
     double NetOutFlow;
     double TotalFlow;
 
-    public YearTable(Year year) {
+    public YearTable(int year) {
         this.year = year;
     }
 
     public void calculateNetInflow() {
-        for (int i = 0; i < fiscalMonths.size(); i++) {
-            NetInFlow += fiscalMonths.get(i).NetInFlow;
+        for (int i = 0; i < fiscalMonths.length; i++) {
+            NetInFlow += fiscalMonths[i].NetInFlow;
         }
     }
 
     public void calculateNetOutflow() {
-        for (int i = 0; i < fiscalMonths.size(); i++) {
-            NetOutFlow += fiscalMonths.get(i).NetOutFlow;
+        for (int i = 0; i < fiscalMonths.length; i++) {
+            NetOutFlow += fiscalMonths[i].NetOutFlow;
         }
     }
 

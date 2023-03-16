@@ -2,6 +2,8 @@ package com.example.tinybusimanager;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
@@ -40,15 +42,17 @@ public class MonthTable {
     }
 
     public static class FinancialFluct {
-        Date date;
+        LocalDate date;
+        LocalTime time;
         String title;
         String description;
         double cash;
         String category;
         String metacategory;
 
-        FinancialFluct(Time date, String title, String description, double cash, String category, String metacategory) {
+        FinancialFluct(LocalDate date, LocalTime time, String title, String description, double cash, String category, String metacategory) {
             this.date = date;
+            this.time = time;
             this.title = title;
             this.description = description;
             this.cash = cash;
