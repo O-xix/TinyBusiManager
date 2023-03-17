@@ -5,6 +5,7 @@ import static com.example.tinybusimanager.MainActivity.metaFinancialActivityLog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -86,6 +87,7 @@ public class InputInOutFlowActivity extends AppCompatActivity {
                 Toast.makeText(InputInOutFlowActivity.this, "You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ", Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < metaFinancialActivityLog.size(); i++) {
+                    System.out.println(i);
                     //cycling through years
                     for (int j = 1; j <= 12; j++) {
                         //cycling through months
@@ -99,6 +101,13 @@ public class InputInOutFlowActivity extends AppCompatActivity {
                 }
                 if (!foundMonthTable) {
                     metaFinancialActivityLog.add(new YearTable(date.getYear()));
+                    if (metaFinancialActivityLog.isEmpty()) {
+                        Toast.makeText(InputInOutFlowActivity.this, "meta isEmpty", Toast.LENGTH_LONG).show();
+                    }
+                    Toast.makeText(InputInOutFlowActivity.this, "Test + " + metaFinancialActivityLog.size(), Toast.LENGTH_LONG).show();
+
+                    //print out seperate elements in Toasts
+
                     metaFinancialActivityLog.get(metaFinancialActivityLog.size() - 1).fiscalMonths[date.getMonthValue() - 1].financialActivities.add(new MonthTable.FinancialFluct(date, time, title, description, cash, category, metacategory));
                 }
 
