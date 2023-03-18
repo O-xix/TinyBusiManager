@@ -5,7 +5,6 @@ import static com.example.tinybusimanager.MainActivity.metaFinancialActivityLog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -101,20 +100,18 @@ public class InputInOutFlowActivity extends AppCompatActivity {
                 }
                 if (!foundMonthTable) {
                     metaFinancialActivityLog.add(new YearTable(date.getYear()));
-                    if (metaFinancialActivityLog.isEmpty()) {
-                        Toast.makeText(InputInOutFlowActivity.this, "meta isEmpty", Toast.LENGTH_LONG).show();
-                    }
-                    Toast.makeText(InputInOutFlowActivity.this, "Test + " + metaFinancialActivityLog.size(), Toast.LENGTH_LONG).show();
-
-                    //print out seperate elements in Toasts
-
-                    metaFinancialActivityLog.get(metaFinancialActivityLog.size() - 1).fiscalMonths[date.getMonthValue() - 1].financialActivities.add(new MonthTable.FinancialFluct(date, time, title, description, cash, category, metacategory));
+                    //print out separate elements in Toasts
+                    //0.2
+                    MonthTable.FinancialFluct financialFluct = new MonthTable.FinancialFluct(date, time, title, description, cash, category, metacategory);
+                    YearTable metaYearAccessor = metaFinancialActivityLog.get(metaFinancialActivityLog.size() - 1);
+                    MonthTable metaMonthAccessor = metaYearAccessor.fiscalMonths[date.getMonthValue() - 1];
+                    metaMonthAccessor.financialActivities.add(financialFluct);
                 }
 
                 //Notification
-                notify = new Notification.Builder(getApplicationContext()).setContentTitle("TinyBusiManager").setContentText("You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ").setContentTitle(metacategory + "added").setSmallIcon(R.drawable.ic_launcher_background).build();
-                notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                NM.notify(0, notify);
+                //notify = new Notification.Builder(getApplicationContext()).setContentTitle("TinyBusiManager").setContentText("You have added the " + title + " " + metacategory.toLowerCase(Locale.ROOT) + " of $" + cash + ". ").setContentTitle(metacategory + "added").setSmallIcon(R.drawable.ic_launcher_background).build();
+                //notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                //NM.notify(0, notify);
 
                 finish();
             }

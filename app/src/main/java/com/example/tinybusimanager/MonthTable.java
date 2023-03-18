@@ -1,24 +1,21 @@
 package com.example.tinybusimanager;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 
 public class MonthTable {
-    Month month;
-    Year year;
+    int month;
+    int year;
     ArrayList<FinancialFluct> financialActivities;
     double NetInFlow;
     double NetOutFlow;
     double TotalFlow;
 
-    public MonthTable(Month month, Year year) {
+    public MonthTable(int month, int year) {
         this.month = month;
         this.year = year;
+        financialActivities = new ArrayList<>();
     }
 
     public void calculateNetInflow() {
